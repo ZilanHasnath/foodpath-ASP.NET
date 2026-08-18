@@ -1,0 +1,358 @@
+﻿@model dotnet.Models.LandingPageViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@Model.Product.Name - Authentic Food</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #dc2626;
+            --primary-hover: #b91c1c;
+            --primary-soft: #fef2f2;
+            --accent-gold: #f59e0b;
+            --bg-canvas: #faf8f5;
+            --surface: #ffffff;
+            --text-main: #1c1917;
+            --text-muted: #78716c;
+            --border-color: #e7e5e4;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --shadow-subtle: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 20px 35px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        .navbar-custom {
+            background: rgba(250, 248, 245, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(231, 229, 228, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 0.5rem 1rem !important;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .hero-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-subtle);
+            padding: 1.5rem;
+        }
+
+        @@media (min-width: 992px) {
+            .hero-card {
+                padding: 3rem;
+            }
+        }
+
+        .hero-img-wrapper {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            width: 100%;
+            height: 280px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        @@media (min-width: 768px) {
+            .hero-img-wrapper {
+                height: 380px;
+            }
+        }
+
+        @@media (min-width: 992px) {
+            .hero-img-wrapper {
+                height: 100%;
+                min-height: 420px;
+            }
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-card:hover .hero-img {
+            transform: scale(1.04);
+        }
+
+        .badge-pill-soft {
+            background: #fef3c7;
+            color: #92400e;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-pill-danger {
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 50px;
+            border: 1px solid #fecaca;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .price-tag {
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            font-size: calc(1.8rem + 1.2vw);
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-subtle);
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+        }
+
+        @@media (min-width: 992px) {
+            .feature-card {
+                padding: 2.5rem;
+            }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .icon-check {
+            width: 32px;
+            height: 32px;
+            background-color: #dcfce7;
+            color: #15803d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        .ingredient-chip {
+            background-color: #fff7ed;
+            color: #c2410c;
+            border: 1px solid #ffedd5;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .ingredient-chip:hover {
+            background-color: #ffedd5;
+            transform: scale(1.02);
+        }
+
+        .btn-custom-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            font-weight: 700;
+            padding: 14px 28px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(220, 38, 38, 0.25);
+        }
+
+        .btn-custom-primary:hover {
+            background-color: var(--primary-hover);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.35);
+        }
+
+        .btn-custom-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--border-color);
+            font-weight: 700;
+            padding: 12px 26px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom-secondary:hover {
+            border-color: var(--text-main);
+            background-color: var(--text-main);
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                Foodpath
+            </a>
+            <button class="navbar-toggler border-0 shadow-none px-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse mt-3 mt-lg-0" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-3 mb-lg-0 gap-lg-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hero">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#highlights">Why Special</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ingredients">Ingredients</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="#order" class="btn btn-custom-primary w-100 w-lg-auto text-center py-2 px-4">
+                        <i class="bi bi-bag-fill me-2"></i>Order Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+        <section id="hero" class="hero-card mb-4 mb-lg-5">
+            <div class="row align-items-center g-4 g-lg-5">
+                <div class="col-lg-6">
+                    <div class="hero-img-wrapper">
+                        <img src="https://i.ytimg.com/vi/O0dVvoP8dLA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD6HtLPL5ACmOTjNVTZpDqgdTRQzg"
+                            class="hero-img" alt="@Model.Product.Name" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                        <span class="badge-pill-soft">
+                            <i class="bi bi-star-fill text-warning"></i> @Model.Product.Rating
+                            <span class="text-muted fw-normal">(@Model.Product.ReviewCount)</span>
+                        </span>
+                        <span class="badge-pill-danger">
+                            <i class="bi bi-geo-alt-fill"></i> Dhaka Special
+                        </span>
+                    </div>
+
+                    <h1 class="display-5 fw-bold mb-2 text-balance">@Model.Product.Name</h1>
+                    <p class="fs-5 text-muted mb-4 fw-medium">@Model.Product.Tagline</p>
+
+                    <div class="d-flex align-items-baseline gap-2 mb-4">
+                        <span class="price-tag">৳@Model.Product.Price</span>
+                        <span class="fs-6 text-muted fw-semibold">/ plate (4 pcs)</span>
+                    </div>
+
+                    <p class="fs-6 text-muted mb-4 lh-lg">@Model.Product.Description</p>
+
+                    <div class="d-flex flex-column flex-sm-row gap-3">
+                        <a href="#order" class="btn btn-custom-primary text-center">
+                            Order Now
+                        </a>
+                        <a href="#highlights" class="btn btn-custom-secondary text-center">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="details" class="row g-4">
+            <div id="highlights" class="col-12 col-md-6">
+                <div class="feature-card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
+                        <div class="fs-3 text-danger"><i class="bi bi-award-fill"></i></div>
+                        <h2 class="h4 fw-bold mb-0">Why It's Special</h2>
+                    </div>
+                    <ul class="list-unstyled mb-0 d-flex flex-column gap-3">
+                        @foreach (var highlight in Model.Product.Highlights)
+                        {
+                            <li class="d-flex align-items-start gap-3">
+                                <span class="icon-check mt-1">
+                                    <i class="bi bi-check-lg"></i>
+                                </span>
+                                <span class="fs-6 fw-medium pt-1 text-secondary">@highlight</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div id="ingredients" class="col-12 col-md-6">
+                <div class="feature-card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
+                        <div class="fs-3 text-warning"><i class="bi bi-basket-fill"></i></div>
+                        <h2 class="h4 fw-bold mb-0">Key Ingredients</h2>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach (var item in Model.Product.Ingredients)
+                        {
+                            <span class="ingredient-chip">
+                                <i class="bi bi-dot"></i>@item
+                            </span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
