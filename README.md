@@ -1,6 +1,6 @@
 # FoodPath
 
-A web application built with ASP.NET Core (.NET 10) and deployed using Docker on Render.
+A web page built with ASP.NET Core (.NET 10) and deployed using Docker on Render.
 
 ## Live Demo
 https://foodpath-wh9l.onrender.com/
